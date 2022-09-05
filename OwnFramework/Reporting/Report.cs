@@ -21,8 +21,11 @@ namespace OwnFramework.Reporting
             date = DateTime.Now;
             fileName = date.Date.Date.ToShortDateString() + date.TimeOfDay.Hours.ToString() + date.TimeOfDay.Minutes.ToString();// Создание имени файла, берётся короткая дата(день,может и год и месяц), часы и минуты - создаётся без пробелов
             reportcsv = new StringBuilder();
-            filePath = @"D:\NewVSCODE\OwnFramework\OwnFramework\Reports\" + fileName + ".csv";
+            //Если делать через '.', то отправляет через папку bin\Debug\netcore3.1\ от solution AutomationTesting
+            //Чтобы отправляло в отдельную папку нужно полный её путь, пока только это
+            filePath = @".\Reports\" + fileName + ".csv";
             createCsvFile();
+            
         }
         private void createCsvFile() // createCsvFile — эта функция создает документ нашего отчета и инициализирует его следующими заголовками: StepDescription — описание шага в тесте. Pass/Fail — результат тестового прогона. Exception — если было выбрано исключение.
         {

@@ -5,6 +5,8 @@ using System.Text;
 using AutomationTesting.Pages;
 using OwnFramework.BasePageTest;
 using OwnFramework.Reporting;
+using OwnFramework.DataReader;
+
 namespace AutomationTesting.Tests
 {
     public class SearchImageTest : BaseTest
@@ -21,5 +23,23 @@ namespace AutomationTesting.Tests
             Assert.IsTrue(BasePage.searchPage.ImageCotent.Displayed);
         }
 
+        //Тот же тест что и SearchImage просто считывает с файла который указан в пути,что надо написать и всё
+        //Работа с тем что написано в файле происходит как с массивов(листом) выбираем элементы
+        [Test]
+        public void filldatafromCsv()
+        {
+            string filePath = @"C:\Users\quick\Desktop\runFile.csv";
+            List<string> data = new List<string>();
+            data = Servers.general.loadCsvFile(filePath);
+            for (int i = 0; i < data.Count; i++)
+            {
+                var values = data[i].Split(';');
+                BasePage.homePage.IsSearchLineVisiable();
+                BasePage.homePage.IsSearchLineVisiable();
+                BasePage.homePage.WriteToSearch(values[0]);
+                BasePage.homePage.ClickSeachButton();
+                Assert.IsTrue(BasePage.searchPage.ImageCotent.Displayed);
+            }
+        }
     }
 }

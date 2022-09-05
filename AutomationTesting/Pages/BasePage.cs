@@ -18,9 +18,17 @@ namespace AutomationTesting.Pages
 
         // Обращение к странице(page) должно быть такое BasePage.YourPage.methods or BasePage.YourPage.property
 
-        public static HomePage homePage => new HomePage();
+        //Новый способ работы с Page через generic
 
-        public static SearchPage searchPage => new SearchPage();
+        public static HomePage homePage=> getPages<HomePage>();
+
+        public static SearchPage searchPage=> getPages<SearchPage>();
+
+        // Старый способ работы с Page
+
+        //public static HomePage homePage => new HomePage();
+
+        //public static SearchPage searchPage => new SearchPage();
 
 
     }
